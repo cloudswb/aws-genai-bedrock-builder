@@ -1,0 +1,11 @@
+lib/**
+node_modules
+test
+
+src/old
+
+examples-list.json
+*.d.ts
+
+backend.json
+frontend.json

@@ -1,0 +1,6 @@
+{
+    "type": "VECTOR",
+    "vectorKnowledgeBaseConfiguration": {
+      "embeddingModelArn": "string"
+    }
+  }

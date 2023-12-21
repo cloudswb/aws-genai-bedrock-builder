@@ -1,0 +1,6 @@
+{
+    "type": "S3",
+    "s3Configuration": {
+      "bucketArn": "string"
+    }
+  }

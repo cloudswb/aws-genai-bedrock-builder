@@ -1,0 +1,13 @@
+{
+    "type": "OPENSEARCH_SERVERLESS",
+    "opensearchServerlessConfiguration": {
+      "collectionArn": "string",
+      "vectorIndexName": "string",
+      "fieldMapping": {
+        "vectorField": "string",
+        "textField": "string",
+        "metadataField": "string"
+      }
+    }
+}
+  

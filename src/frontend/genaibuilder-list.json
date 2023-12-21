@@ -1,0 +1,31 @@
+[
+  {
+    "path": "chatmodel",
+    "title": "chat with bedrock LLM"
+  },
+  {
+    "path": "chatagent",
+    "title": "chat with bedrock agent"
+  },
+  {
+    "path": "chatagent",
+    "title": "chat Agent page"
+  },
+  {
+    "path": "knowledgebase",
+    "title": "knowledge base page"
+  },
+  {
+    "path": "kbupload",
+    "title": "Knowledge base upload"
+  },
+  {
+    "path": "translate",
+    "title": "AITranslate page"
+  },
+  {
+    "path": "records",
+    "title": "Requestion records page"
+  }
+
+]
