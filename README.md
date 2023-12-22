@@ -1,14 +1,14 @@
 # GenAI Builder Solution
 
-Owner: 克寒
-
 # Architecture
 
 ![Untitled](readmefiles/Untitled.png)
 
 # Features Introduction
 
-[GenAIbuilder_1.5x.mp4](readmefiles/GenAIbuilder_1.5x.mp4)
+![Untitled](readmefiles/snapshot1.gif)
+![Untitled](readmefiles/snapshot2.gif)
+![Untitled](readmefiles/snapshot3.gif)
 
 # Deploy Manual
 
