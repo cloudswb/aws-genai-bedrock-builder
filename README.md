@@ -103,6 +103,7 @@ Run the following shell script to deploy Backend service:
 
 ```jsx
 sudo npm install
+chmod +x ./bin/deploy.sh
 ./bin/deploy.sh
 ```
 
@@ -135,6 +136,7 @@ Login use the user created in Chapter 4.1:
 
 ## 4. Destroy resources
 ```jsx
+chmod +x ./bin/destroy.sh
 ./bin/destroy.sh 
 ```
 
