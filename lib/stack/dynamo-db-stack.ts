@@ -9,13 +9,14 @@ interface Props extends NestedStackProps {
  
 export class DynamoDBStack extends Stack {
 
-    public readonly RecordsTableName : string;
+  public readonly RecordsTableName : string;
 
-  constructor(scope: Construct, id: string, props: Props) {
-    super(scope, id, props);
+  constructor(scope: Construct, id: string, prefix: string) {
+    super(scope, id);
  
 
     const table = new dynamodb.Table(this, 'Messages', {
+      tableName: `${prefix}RecordsTable`,
       partitionKey: {
         name: 'username',
         type: dynamodb.AttributeType.STRING

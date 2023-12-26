@@ -143,12 +143,12 @@ const ParentComponent = () => {
 
               
               const tabs = []
-              streamedDataObject.body.citations.map((citation)=> {
+              streamedDataObject.body.citations.map((citation, index)=> {
                 citation.retrievedReferences.map((item) => {
                   const pathComponents = item.location.s3Location.uri.split('/');
                   tabs.push({
-                    label: pathComponents[pathComponents.length - 1],
-                    id: item.location.s3Location.uri,
+                    label: `${pathComponents[pathComponents.length - 1]}-${index}`,
+                    id: `${item.location.s3Location.uri}-${index}`,
                     content: <Box><div><Header variant="h4">File Path: </Header> {item.location.s3Location.uri}</div> <div> <Header variant="h4">Reference Content: </Header> {item.content.text}</div> </Box>
                   });
                 })
@@ -343,7 +343,7 @@ const ParentComponent = () => {
               value={ask}
               onChange={({ detail }) => {
                 setAsk(detail.value);
-                updateSubmitState();
+                setSubmitState(detail.value.trim() == '' ? true : false);
               }
               }
             />
@@ -353,6 +353,7 @@ const ParentComponent = () => {
                 <Button variant="link" onClick={() => { 
                   setAsk('') 
                   updateSubmitState()
+                  
                   }}>Clean</Button>
                 <Button variant="primary" onClick={() => handleAddConversionItem()} disabled={submitState}>{submitText}</Button>
               </SpaceBetween>

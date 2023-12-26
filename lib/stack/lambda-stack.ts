@@ -34,22 +34,21 @@ export class CDKLambdaStack extends Stack {
     public securitySignHost: string;
 
 
-    constructor(scope: Construct, id: string, props: LambdatackProps) {
+    constructor(scope: Construct, id: string, prefix: string, props: LambdatackProps) {
         super(scope, id, props)
 
 
-        const prefix = Config.ProjectPrefix;
         this.LambdaRecordsList({
             functionName: `${prefix}RecordsListFunction`,
             lambdaLayers: props.lambdaLayers,
             lambdaIamUser: props.lambdaIamUser
-        });
+        }, prefix);
 
         this.LambdaAgentInvoke({
             functionName: `${prefix}AgentInvokeFunction`,
             lambdaIamUser: props.lambdaIamUser,
             lambdaLayers: props.lambdaLayers
-        });
+        }, prefix);
         this.LambdaKBIngest({
             functionName: `${prefix}KBIngestFunction`,
             lambdaLayers: props.lambdaLayers,
@@ -59,7 +58,7 @@ export class CDKLambdaStack extends Stack {
             functionName: `${prefix}KBInvokeFunction`,
             lambdaLayers: props.lambdaLayers,
             lambdaIamUser: props.lambdaIamUser
-        });
+        }, prefix);
         this.LambdaKBList({
             functionName: `${prefix}KBListFunction`,
             lambdaLayers: props.lambdaLayers,
@@ -69,7 +68,7 @@ export class CDKLambdaStack extends Stack {
             functionName: `${prefix}ModelInvokeFunction`,
             lambdaLayers: props.lambdaLayers,
             lambdaIamUser: props.lambdaIamUser
-        });
+        }, prefix);
         this.LambdaS3Presign({
             functionName: `${prefix}S3PresignFunction`,
             lambdaLayers: props.lambdaLayers,
@@ -88,7 +87,9 @@ export class CDKLambdaStack extends Stack {
                 functionName: `${prefix}SecuritySignFunction`,
                 lambdaLayers: props.lambdaLayers,
                 lambdaIamUser: props.lambdaIamUser,
-                userPool: props.userPool
+                userPool: props.userPool,
+                lambdaIamUserAccessKey: props.lambdaIamUserAccessKey,
+                lambdaIamUserSecretKey: props.lambdaIamUserSecretKey,
             });
         }
 
@@ -195,7 +196,7 @@ export class CDKLambdaStack extends Stack {
 
     }
 
-    private LambdaModelInvoke(props: LambdatackProps) {
+    private LambdaModelInvoke(props: LambdatackProps, prefix: string) {
         const lambdaPolicy = new PolicyStatement();
         lambdaPolicy.addActions("bedrock:*");
         lambdaPolicy.addResources("*");
@@ -213,6 +214,7 @@ export class CDKLambdaStack extends Stack {
             timeout: Duration.seconds(120),
             environment: {
                 REGION: Config.Region,
+                RECORDS_TABLENAME: `${prefix}RecordsTable`
             },
             initialPolicy: [lambdaPolicy, ddbPolicy],
             // layers: [props.lambdaLayers.clientBedrockAgent, props.lambdaLayers.awsJwtVerify, props.lambdaLayers.awsSdk, props.lambdaLayers.clientBedrockAgentRuntime, props.lambdaLayers.clientBedrockRuntime, props.lambdaLayers.jsonwebtoken]
@@ -300,7 +302,7 @@ export class CDKLambdaStack extends Stack {
 
     }
 
-    private LambdaKbInvoke(props: LambdatackProps) {
+    private LambdaKbInvoke(props: LambdatackProps, prefix: string) {
         const lambdaPolicy = new PolicyStatement();
         lambdaPolicy.addActions("bedrock:*");
         lambdaPolicy.addResources("*");
@@ -318,6 +320,7 @@ export class CDKLambdaStack extends Stack {
             timeout: Duration.seconds(90),
             environment: {
                 REGION: Config.Region,
+                RECORDS_TABLENAME: `${prefix}RecordsTable`
             },
             initialPolicy: [lambdaPolicy, ddbPolicy],
             // layers: [props.lambdaLayers.clientBedrockAgent, props.lambdaLayers.awsJwtVerify, props.lambdaLayers.awsSdk, props.lambdaLayers.clientBedrockAgentRuntime, props.lambdaLayers.clientBedrockRuntime, props.lambdaLayers.jsonwebtoken]
@@ -411,7 +414,7 @@ export class CDKLambdaStack extends Stack {
         this.kbIngestHost = functionUrl.url
     }
 
-    private LambdaAgentInvoke(props: LambdatackProps) {
+    private LambdaAgentInvoke(props: LambdatackProps, prefix: string) {
         const lambdaPolicy = new PolicyStatement();
         lambdaPolicy.addActions("bedrock:*");
         lambdaPolicy.addResources("*");
@@ -429,6 +432,7 @@ export class CDKLambdaStack extends Stack {
             timeout: Duration.seconds(120),
             environment: {
                 REGION: Config.Region,
+                RECORDS_TABLENAME: `${prefix}RecordsTable`
             },
             initialPolicy: [lambdaPolicy, ddbPolicy],
             // layers: [props.lambdaLayers.clientBedrockAgent, props.lambdaLayers.awsJwtVerify, props.lambdaLayers.awsSdk, props.lambdaLayers.clientBedrockAgentRuntime, props.lambdaLayers.clientBedrockRuntime, props.lambdaLayers.jsonwebtoken]
@@ -466,7 +470,7 @@ export class CDKLambdaStack extends Stack {
 
     }
 
-    private LambdaRecordsList(props: LambdatackProps) {
+    private LambdaRecordsList(props: LambdatackProps, prefix: string) {
 
         const ddbPolicy = new PolicyStatement();
         ddbPolicy.addActions("dynamodb:*");
@@ -481,7 +485,7 @@ export class CDKLambdaStack extends Stack {
             timeout: Duration.seconds(15),
             environment: {
                 REGION: Config.Region,
-                RECORDS_TABLENAME: props.RecordsTableName == undefined ? "" : props.RecordsTableName
+                RECORDS_TABLENAME: `${prefix}RecordsTable`
             },
             initialPolicy: [ddbPolicy],
         });
@@ -563,8 +567,8 @@ export class CDKLambdaStack extends Stack {
             timeout: Duration.seconds(15),
             environment: {
                 REGION: Config.Region,
-                ACCESS_KEY: props.lambdaIamUserAccessKey == undefined ? "" : props.lambdaIamUserAccessKey,
-                SECRET_KEY: props.lambdaIamUserSecretKey == undefined ? "" : props.lambdaIamUserSecretKey,
+                ACCESS_KEY: props.lambdaIamUserAccessKey ? props.lambdaIamUserAccessKey : "",
+                SECRET_KEY: props.lambdaIamUserSecretKey ? props.lambdaIamUserSecretKey : "",
             },
             initialPolicy: [lambdaPolicy],
         });

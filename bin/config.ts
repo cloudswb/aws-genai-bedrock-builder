@@ -1,7 +1,8 @@
 export const Config = {
-    ProjectPrefix: 'DebugGenAIBuilder',
+    Auth: 'iam',
     DomainName: 'piyao.com',
-    SiteSubDomain: 'genai-dev',
+    SiteSubDomain: 'genai-builder-prod',
     Region: "us-east-1",
-    Auth: 'iam'
+    AccountID: "629244530291",
+    
 }

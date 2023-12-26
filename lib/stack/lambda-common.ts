@@ -184,7 +184,8 @@ export interface LambdatackProps extends LambdaBaseProps {
     userPool?: UserPool,
     lambdaIamUserAccessKey?: string,
     lambdaIamUserSecretKey?: string,
-    RecordsTableName?: string
+    RecordsTableName?: string,
+    
 }
 
 export interface LambdaBaseProps extends StackProps {

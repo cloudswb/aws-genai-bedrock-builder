@@ -4,7 +4,7 @@
         "promptType": "PRE_PROCESSING",
         "promptCreationMode": "OVERRIDDEN",
         "promptState": "DISABLED",
-        "basePromptTemplate": "string- PRE_PROCESSING",
+        "basePromptTemplate": "PRE_PROCESSING is disabled",
         "inferenceConfiguration":
         {
           "temperature": 0,
@@ -27,6 +27,21 @@
           "topK": 250,
           "maximumLength": 100,
           "stopSequences": ["</answer>","</error>"]
+        },
+        "parserMode": "DEFAULT"
+      },
+      {
+        "promptType": "KNOWLEDGE_BASE_RESPONSE_GENERATION",
+        "promptCreationMode": "OVERRIDDEN",
+        "promptState": "DISABLED",
+        "basePromptTemplate": "$conversation_history$",
+        "inferenceConfiguration":
+        {
+          "temperature": 0,
+          "topP": 1,
+          "topK": 250,
+          "maximumLength": 100,
+          "stopSequences": ["⏎⏎Human:"]
         },
         "parserMode": "DEFAULT"
       },

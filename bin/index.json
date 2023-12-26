@@ -1,0 +1,35 @@
+{
+   "settings": {
+      "index": {
+         "knn": true,
+         "knn.algo_param.ef_search": 512
+       }
+   },
+   "mappings": {
+      "properties": {
+         "bedrock-knowledge-base-default-vector": {
+            "type": "knn_vector",
+            "dimension": 1536,
+            "method": {
+               "name":"hnsw",
+               "engine":"nmslib",
+               "space_type": "l2",
+               "parameters":{
+                   "m":16,
+                   "ef_construction": 512
+               }
+           }
+         },
+         "AMAZON_BEDROCK_METADATA": {
+            "type": "text",
+            "index": false
+         },
+         "AMAZON_BEDROCK_TEXT_CHUNK": {
+            "type": "text"
+         },
+         "id": {
+            "type": "text"
+         }
+      }
+   }
+}

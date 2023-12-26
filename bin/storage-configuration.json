@@ -1,0 +1,43 @@
+{
+    "type": "OPENSEARCH_SERVERLESS",
+    "opensearchServerlessConfiguration": {
+      "collectionArn": "string",
+      "vectorIndexName": "string",
+      "fieldMapping": {
+        "vectorField": "string",
+        "textField": "string",
+        "metadataField": "string"
+      }
+    },
+    "pineconeConfiguration": {
+      "connectionString": "string",
+      "credentialsSecretArn": "string",
+      "namespace": "string",
+      "fieldMapping": {
+        "textField": "string",
+        "metadataField": "string"
+      }
+    },
+    "redisEnterpriseCloudConfiguration": {
+      "endpoint": "string",
+      "vectorIndexName": "string",
+      "credentialsSecretArn": "string",
+      "fieldMapping": {
+        "vectorField": "string",
+        "textField": "string",
+        "metadataField": "string"
+      }
+    },
+    "rdsConfiguration": {
+      "resourceArn": "string",
+      "credentialsSecretArn": "string",
+      "databaseName": "string",
+      "tableName": "string",
+      "fieldMapping": {
+        "primaryKeyField": "string",
+        "vectorField": "string",
+        "textField": "string",
+        "metadataField": "string"
+      }
+    }
+  }
