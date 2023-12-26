@@ -31,7 +31,7 @@ kbRoleArn=$(echo $outputs | jq -r ".${prefix}OpenSearchVectorDBStack.kbRoleArn")
 collectionArn=$(echo $outputs | jq -r ".${prefix}OpenSearchVectorDBStack.CollectionArn")
 
 
-cdk destroy --all --require-approval never --context target=backend  --context prefix=$prefix --context callerUserArn=$callerUserArn
-cdk destroy --all --require-approval never --context target=kb --context prefix=$prefix  --context collectionArn=$collectionArn --context kbRoleArn=$kbRoleArn --context kbS3Arn=$kbS3Arn
-cdk destroy --all --require-approval never --context target=frontend  --context prefix=$prefix 
+cdk destroy --all --force --context target=backend  --context prefix=$prefix --context callerUserArn=$callerUserArn
+cdk destroy --all --force --context target=kb --context prefix=$prefix  --context collectionArn=$collectionArn --context kbRoleArn=$kbRoleArn --context kbS3Arn=$kbS3Arn
+cdk destroy --all --force --context target=frontend  --context prefix=$prefix 
 aws dynamodb delete-table --table-name "$prefix"RecordsTable
