@@ -34,15 +34,16 @@
     to makke sure your CDK version >= 2.116.1
     
     ```jsx
-    
-    npm install -g aws-cdk
+    sudo yum install nodejs npm 
+    sudo npm install -g typescript
+    sudo npm install -g aws-cdk
     cdk --version
     ```
 3.  AWSCurl
     https://github.com/okigan/awscurl
 
     ```jsx
-    
+    sudo yum install pip -y
     pip install awscurl
     awscurl
     ```
@@ -54,7 +55,7 @@
     https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html
 
     Then set up the aws cli:
-    https://docs.aws.amazon.com/cli/latest/userguide/getting-started-quickstart.html
+    https://docs.aws.amazon.com/cli/latest/userguide/getting-started-quickstart.html#getting-started-quickstart-new-command
 
     ```jsx
     aws configure
@@ -95,6 +96,7 @@ export const Config = {
 Run the following shell script to deploy Backend service:
 
 ```jsx
+sudo npm install
 ./bin/deploy.sh
 ```
 

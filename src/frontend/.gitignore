@@ -7,6 +7,5 @@ src/old
 examples-list.json
 *.d.ts
 
-/config.js
 backend.json
 frontend.json
