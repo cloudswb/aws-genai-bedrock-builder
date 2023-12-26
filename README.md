@@ -17,10 +17,20 @@
 1. AWS CLI Upgrade
     
     [https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
+
+    If you are using Linux x86, the following script can used to upgrade:
+    to makke sure your AWS cli version >= 2.15.4
+    ```jsx
     
+    curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+    unzip awscliv2.zip
+    sudo ./aws/install --bin-dir /usr/local/bin --install-dir /usr/local/aws-cli --update
+    ```
 2. AWS CDK Upgrade
     
     [https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-up-node-on-ec2-instance.html](https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-up-node-on-ec2-instance.html)
+
+    to makke sure your CDK version >= 2.116.1
     
     ```jsx
     
@@ -44,7 +54,7 @@
     
 
 
-## 2. Deploy Backend Serives
+## 2. Deploy
 
 ### 2.1 Get the latest source code from Github
 
@@ -57,8 +67,8 @@ git clone https://github.com/cloudswb/aws-genai-bedrock-builder.git
 We can customize the project name prefix, this prefix will add to the CDK stack and Lambda function name.
 
 ```jsx
-cd bin/
-vim config.ts
+cd aws-genai-bedrock-builder/
+vim bin/config.ts
 ```
 
 Now you can modify this config file according the following comments:
@@ -77,15 +87,15 @@ export const Config = {
 Run the following shell script to deploy Backend service:
 
 ```jsx
-./bin/deploy.sh 
+./bin/deploy.sh
 ```
 
-After the message “All deploy task has finished.”  output in the terminal, that’s mean all deployment has finished.
+After deploy finished, there will have a CloudFront distribution info print out.
 
 
 ## 3. Run website
 
-### 3.1 Create login user in Cognito user pool
+### 3.1 Prepare login user in Cognito user pool
 
 You can get the Cognito info from CloudFormation stack “[XXX]CognitoUserPoolStack”
 
