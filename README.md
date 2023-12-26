@@ -34,6 +34,10 @@
     to makke sure your CDK version >= 2.116.1 and npm version >= 10.2.5
     
     ```jsx
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
+    . ~/.nvm/nvm.sh
+    nvm install v18.19.0
+
     sudo yum install nodejs npm -y
     sudo npm install -g npm@latest
     sudo npm install -g typescript -y

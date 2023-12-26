@@ -29,7 +29,7 @@ import {
 import ToolsContent from '../details/tools-content.jsx';
 import '../../styles/base.scss';
 import { config } from '../../../config';
-import Markdown from '../commons/Markdown';
+import Markdown from '../commons/Markdown.js';
 const getStream = require('get-stream');
 const translateOption = { llm: 'anthropic.claude-v2', promptTemplate: 1 }
 
