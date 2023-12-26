@@ -22,7 +22,7 @@
     to makke sure your AWS cli version >= 2.15.4
     ```jsx
     sudo yum update -y
-    
+
     curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
     unzip awscliv2.zip
     sudo ./aws/install --bin-dir /usr/local/bin --install-dir /usr/local/aws-cli --update
@@ -49,6 +49,13 @@
 
 4. Set Local Access Key and Secret Key, use a user access key which has access to deploy.
     
+    Prepare an access key first, which have access to create releated resources.
+
+    https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html
+
+    Then set up the aws cli:
+    https://docs.aws.amazon.com/cli/latest/userguide/getting-started-quickstart.html
+
     ```jsx
     aws configure
     ```
