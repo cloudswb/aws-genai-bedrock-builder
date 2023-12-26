@@ -12,7 +12,7 @@
 
 # Deploy Manual
 
-## 1. Precondition
+## 1. Prepare
 
 1. AWS CLI Upgrade
     
@@ -27,29 +27,32 @@
     npm install -g aws-cdk
     cdk --version
     ```
+3.  AWSCurl
+    https://github.com/okigan/awscurl
+
+    ```jsx
     
-3. Set Local Access Key and Secret Key, use a user access key which has access to deploy.
+    pip install awscurl
+    awscurl
+    ```
+
+4. Set Local Access Key and Secret Key, use a user access key which has access to deploy.
     
     ```jsx
     aws configure
     ```
     
 
-## 2. Create Bedrock Agent and Bedrock Knowledge
 
-2.1 Create Bedrock Agent
+## 2. Deploy Backend Serives
 
-2.2 Create Knowledge Base 
-
-## 3. Deploy Backend Serives
-
-### 3.1 Get the latest source code from Github
+### 2.1 Get the latest source code from Github
 
 ```jsx
 git clone https://github.com/cloudswb/aws-genai-bedrock-builder.git
 ```
 
-### 3.2 PreConfig deployment
+### 2.2 PreConfig deployment
 
 We can customize the project name prefix, this prefix will add to the CDK stack and Lambda function name.
 
@@ -62,7 +65,6 @@ Now you can modify this config file according the following comments:
 
 ```jsx
 export const Config = {
-    ProjectPrefix: 'DebugGenAIBuilder', // The project name prefix
     DomainName: 'piyao.com', // The domain name(used as a website S3 bucket with SiteSubDomain
     SiteSubDomain: 'genai-dev', // combine with DomainName as a S3 bucket name
     Region: "us-east-1", // The region will be deploy, suggest same with aws cli credentional setting.
@@ -70,29 +72,20 @@ export const Config = {
 }
 ```
 
-### 3.3 Run deployment
+### 2.3 Run deployment
 
-3.1 Run the following shell script to deploy Backend service:
+Run the following shell script to deploy Backend service:
 
 ```jsx
-./bin/deploy.sh backend
+./bin/deploy.sh 
 ```
 
 After the message “All deploy task has finished.”  output in the terminal, that’s mean all deployment has finished.
 
-![Untitled](readmefiles/Untitled%201.png)
 
-3.2 Config the lambda Access
+## 3. Run website
 
-Get the Access Key and Secret Key from “[XXX]IAMUserRoleStack”
-
-![Untitled](readmefiles/Untitled%202.png)
-
-Set the Access Key and Secret Key to the Environment Variable of Lambda Function “[XXX]SecuritySignFunction”
-
-![Untitled](readmefiles/Untitled%203.png)
-
-3.3 Create a user from Cognito to Login later.
+### 3.1 Create login user in Cognito user pool
 
 You can get the Cognito info from CloudFormation stack “[XXX]CognitoUserPoolStack”
 
@@ -100,66 +93,25 @@ You can get the Cognito info from CloudFormation stack “[XXX]CognitoUserPoolSt
 
 ![Untitled](readmefiles/Untitled%205.png)
 
-## 4. Deploy Frontend Website
 
-### 4.1 PreConfig the Bedrock Agent for website
 
-```jsx
-cd src/frontend
-vim backend.json
-```
-
-Input the Bedrock Agent Id and Bedrock Agent Alias in backend.json.
-
-You can get the agentId in Chapter 2.
-
-For agentAlias, if you did not create a Alias, you can input ‘TSTALIASID’ by default. otherwise, you need input the new created agent alias.
-
-![Untitled](readmefiles/Untitled%206.png)
-
-### 4.2 Run Website deployment
-
-Use NPM to build the website
-
-```jsx
-cd src/frontend
-npm install
-npm run build
-```
-
-Deploy the website to S3 and CloudFront
-
-```jsx
-cd ../../
-./bin/deploy.sh frontend
-```
-
-Get Frontend CloudFront distribution:
-
-## 5. Test
+### 3.2 Run Website deployment
 
 Get the output the CloudFront Address: like the url : [d21wi5ogab28wm.cloudfront.net](http://d21wi5ogab28wm.cloudfront.net/) according to outputs.
 
 ![Untitled](readmefiles/Untitled%207.png)
 
-Login and try to use:
+Login use the user created in Chapter 4.1:
 
 ![Untitled](readmefiles/Untitled%208.png)
 
-## 6. Exception resolve
 
-### 6.1 {"message":"The security token included in the request is invalid."}
 
-![Untitled](readmefiles/Untitled%209.png)
+## 4. Destroy resources
+```jsx
+./bin/destroy.sh 
+```
 
-**Reason:**
+## 5. Advance Operation
 
-The User Access Key not exists in lambda or this key is inActive.
-
-**Resolve:** 
-
-Go to IAM user(cloudfromation output ‘LambdaIamUserArn’, in stack [XXX]IAMUserRoleStack),
-
-Make sure the Access Key in Active.
-
-![Untitled](readmefiles/Untitled%2010.png)
+<!-- ### 5.1 Change the project name to deploy multiple  -->

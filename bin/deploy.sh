@@ -125,3 +125,5 @@ npm install
 npm run build
 cd ../../
 cdk deploy --all --require-approval never --context target=frontend --outputs-file src/frontend/frontend.json
+
+echo "All deploy tasks are done..."
