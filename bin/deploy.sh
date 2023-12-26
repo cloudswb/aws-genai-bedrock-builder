@@ -58,7 +58,7 @@ echo "CDK deploy frist stage  completed"
 echo "Starting create bedrock agent..."
 
 getAgentList=$(aws bedrock-agent list-agents --output json)
-echo $getAgentList
+# echo $getAgentList
 agentId=$(echo "$getAgentList" | jq -r '.agentSummaries[] | select(.agentName == "genai-builder-agent") | .agentId')
 echo "$agentId"
 
@@ -90,7 +90,7 @@ if [ -z "$agentId" ]; then
 
 else
   getAgentAliasList=$(aws bedrock-agent list-agent-aliases --agent-id $agentId --output json)
-  echo $getAgentAliasList
+  # echo $getAgentAliasList
   agentAliasId=$(echo "$getAgentAliasList" | jq -r '.agentAliasSummaries[] | select(.agentAliasName == "genai-builder-alias-prod") | .agentAliasId')
   echo "$agentAliasId"
 
