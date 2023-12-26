@@ -31,13 +31,15 @@
     
     [https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-up-node-on-ec2-instance.html](https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-up-node-on-ec2-instance.html)
 
-    to makke sure your CDK version >= 2.116.1
+    to makke sure your CDK version >= 2.116.1 and npm version >= 10.2.5
     
     ```jsx
-    sudo yum install nodejs npm 
-    sudo npm install -g typescript
-    sudo npm install -g aws-cdk
+    sudo yum install nodejs npm -y
+    sudo npm install -g npm@latest
+    sudo npm install -g typescript -y
+    sudo npm install -g aws-cdk -y
     cdk --version
+    npm --version
     ```
 3.  AWSCurl
     https://github.com/okigan/awscurl
@@ -68,6 +70,7 @@
 ### 2.1 Get the latest source code from Github
 
 ```jsx
+sudo yum install git -y
 git clone https://github.com/cloudswb/aws-genai-bedrock-builder.git
 ```
 
@@ -77,6 +80,9 @@ We can customize the project name prefix, this prefix will add to the CDK stack 
 
 ```jsx
 cd aws-genai-bedrock-builder/
+```
+
+```jsx
 vim bin/config.ts
 ```
 

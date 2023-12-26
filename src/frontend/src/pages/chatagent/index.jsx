@@ -28,7 +28,7 @@ import {
   CustomAppLayout,
   Navigation
 } from '../commons/common-components';
-import Markdown from '../commons/Markdown';
+import Markdown from '../commons/Markdown.js';
 import ToolsContent from '../details/tools-content.jsx';
 import '../../styles/base.scss';
 // import { config } from 'process';
