@@ -21,6 +21,7 @@
     If you are using Linux x86, the following script can used to upgrade:
     to makke sure your AWS cli version >= 2.15.4
     ```jsx
+    sudo yum update -y
     
     curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
     unzip awscliv2.zip
