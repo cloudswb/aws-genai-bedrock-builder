@@ -27,6 +27,11 @@ Features:
 
 # Deploy Manual
 
+Here is a video to demostrate how to deploy this solution.
+
+[![Watch the video](https://i.stack.imgur.com/Vp2cE.png)](https://player.bilibili.com/player.html?aid=835336335&bvid=BV1eg4y1k7dG&cid=1382420544&p=1)
+
+
 ## 1. Prepare
 
 1. AWS CLI Upgrade
