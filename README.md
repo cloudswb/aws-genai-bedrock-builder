@@ -54,7 +54,7 @@ Features:
     nvm install v18.19.0
 
     sudo yum install nodejs npm -y
-    sudo npm install -g npm@latest
+    curl -qL https://www.npmjs.com/install.sh | sh
     sudo npm install -g typescript -y
     sudo npm install -g aws-cdk -y
     cdk --version
@@ -162,3 +162,4 @@ chmod +x ./bin/destroy.sh
 ## 5. Advance Operation
 
 <!-- ### 5.1 Change the project name to deploy multiple  -->
+
