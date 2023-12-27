@@ -21,7 +21,7 @@ Features:
 
 # Features Introduction
 
-![Untitled](readmefiles/snapshot1.gif)
+![drawing](readmefiles/snapshot1.gif)
 ![Untitled](readmefiles/snapshot2.gif)
 ![Untitled](readmefiles/snapshot3.gif)
 
@@ -29,7 +29,7 @@ Features:
 
 Here is a video to demostrate how to deploy this solution.
 
-[![Watch the video](https://i.stack.imgur.com/Vp2cE.png)](https://player.bilibili.com/player.html?aid=835336335&bvid=BV1eg4y1k7dG&cid=1382420544&p=1)
+Chinese Language: https://www.bilibili.com/video/BV1eg4y1k7dG/?vd_source=6df02a0ae1f07534259dc93752e87f7c
 
 
 ## 1. Prepare
