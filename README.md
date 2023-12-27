@@ -32,7 +32,13 @@ Here is a video to demostrate how to deploy this solution.
 
 ## 1. Prepare
 
-1. AWS CLI Upgrade
+1. EC2 with Amazon Linux 2023
+    - AMI:  Amazon Linux 2023 x86
+    - Instance Type: t3.xlarge
+    - EBS: >=10GB
+    - Network: Public access with SSH
+
+2. AWS CLI Upgrade
     
     [https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
 
@@ -45,7 +51,7 @@ Here is a video to demostrate how to deploy this solution.
     unzip awscliv2.zip
     sudo ./aws/install --bin-dir /usr/local/bin --install-dir /usr/local/aws-cli --update
     ```
-2. AWS CDK Upgrade
+3. AWS CDK Upgrade
     
     [https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-up-node-on-ec2-instance.html](https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-up-node-on-ec2-instance.html)
 
@@ -63,7 +69,7 @@ Here is a video to demostrate how to deploy this solution.
     cdk --version
     npm --version
     ```
-3.  AWSCurl
+4.  AWSCurl
     https://github.com/okigan/awscurl
 
     ```jsx
@@ -72,7 +78,7 @@ Here is a video to demostrate how to deploy this solution.
     awscurl
     ```
 
-4. Set Local Access Key and Secret Key, use a user access key which has access to deploy.
+5. Set Local Access Key and Secret Key, use a user access key which has access to deploy.
     
     Prepare an access key first, which have access to create releated resources.
 
