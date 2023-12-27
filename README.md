@@ -27,9 +27,12 @@ Features:
 
 # Deploy Manual
 
+## Video : Full deploy progress 
 Here is a video to demostrate how to deploy this solution.
 
-Chinese Language: https://www.bilibili.com/video/BV1eg4y1k7dG/?vd_source=6df02a0ae1f07534259dc93752e87f7c
+- Chinese Language: 
+
+  - https://www.bilibili.com/video/BV1eg4y1k7dG/?vd_source=6df02a0ae1f07534259dc93752e87f7c
 
 
 ## 1. Prepare
