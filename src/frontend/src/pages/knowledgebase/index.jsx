@@ -144,11 +144,11 @@ const ParentComponent = () => {
               
               const tabs = []
               streamedDataObject.body.citations.map((citation, index)=> {
-                citation.retrievedReferences.map((item) => {
+                citation.retrievedReferences.map((item, index2) => {
                   const pathComponents = item.location.s3Location.uri.split('/');
                   tabs.push({
-                    label: `${pathComponents[pathComponents.length - 1]}-${index}`,
-                    id: `${item.location.s3Location.uri}-${index}`,
+                    label: `${pathComponents[pathComponents.length - 1]}-${index}-${index2}`,
+                    id: `${item.location.s3Location.uri}-${index}-${index2}`,
                     content: <Box><div><Header variant="h4">File Path: </Header> {item.location.s3Location.uri}</div> <div> <Header variant="h4">Reference Content: </Header> {item.content.text}</div> </Box>
                   });
                 })
