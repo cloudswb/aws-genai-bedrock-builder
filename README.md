@@ -19,11 +19,6 @@ Features:
 
 ![Untitled](readmefiles/Untitled.png)
 
-# Features Introduction
-
-![drawing](readmefiles/snapshot1.gif)
-![Untitled](readmefiles/snapshot2.gif)
-![Untitled](readmefiles/snapshot3.gif)
 
 # Deploy Manual
 
@@ -171,3 +166,8 @@ chmod +x ./bin/destroy.sh
 
 <!-- ### 5.1 Change the project name to deploy multiple  -->
 
+# Features Introduction
+
+![drawing](readmefiles/snapshot1.gif)
+![Untitled](readmefiles/snapshot2.gif)
+![Untitled](readmefiles/snapshot3.gif)
