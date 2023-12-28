@@ -132,7 +132,7 @@ export const Config = {
 
 ### 2.3 Run deployment
 
-Initialize CDK environment:
+Initialize CDK environment(If you already installed you can skip this step):
 
 ```jsx
 cdk bootstrap
