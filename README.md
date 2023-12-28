@@ -132,10 +132,15 @@ export const Config = {
 
 ### 2.3 Run deployment
 
-Run the following shell script to deploy Backend service:
+Initialize CDK environment:
 
 ```jsx
 cdk bootstrap
+```
+
+Run the following shell script to deploy Backend service:
+
+```jsx
 sudo npm install
 chmod +x ./bin/deploy.sh
 ./bin/deploy.sh
