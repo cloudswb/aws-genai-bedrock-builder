@@ -135,6 +135,7 @@ export const Config = {
 Run the following shell script to deploy Backend service:
 
 ```jsx
+cdk bootstrap
 sudo npm install
 chmod +x ./bin/deploy.sh
 ./bin/deploy.sh
