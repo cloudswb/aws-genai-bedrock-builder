@@ -10,10 +10,19 @@ echo $prefix
 echo "Waiting for the stack creation to complete..."
 
 echo "Start check the crenditional info..."
+configRegion=$(aws configure get region)
+echo $configRegion
+
 callerIdentity=$(aws sts get-caller-identity)
 echo $callerIdentity
+callerAccount=$(echo $callerIdentity | jq -r '.Account')
 callerUserArn=$(echo $callerIdentity | jq -r '.Arn')
+echo $callerAccount
 echo $callerUserArn
+
+echo "Start initialize the cdk bootstrap..."
+cdk bootstrap aws://$callerAccount/$configRegion
+echo "Finished initialize the cdk bootstrap..."
 
 if [ -z "$callerUserArn" ]; then
   echo "The caller indentity is empty, please config the aws cli crenditional info first."
@@ -119,7 +128,7 @@ echo "Finished create KB datasource ..."
 
 
 echo "Finished output bedrock agent json file..."
-
+cd ..
 cd src/frontend/
 npm install
 npm run build

@@ -132,18 +132,14 @@ export const Config = {
 
 ### 2.3 Run deployment
 
-Initialize CDK environment(If you already installed you can skip this step):
-
-```jsx
-cdk bootstrap
-```
-
 Run the following shell script to deploy all services:
 
 ```jsx
 sudo npm install
-chmod +x ./bin/deploy.sh
-./bin/deploy.sh
+
+cd bin/
+chmod +x ./deploy.sh
+./deploy.sh
 ```
 
 After deploy finished, there will have a CloudFront distribution info print out.
@@ -167,16 +163,13 @@ Get the output the CloudFront Address: like the url : [d21wi5ogab28wm.cloudfront
 
 ![Untitled](readmefiles/Untitled%207.png)
 
-Login use the user created in Chapter 4.1:
-
-![Untitled](readmefiles/Untitled%208.png)
-
-
+Login use the user created in Chapter 4.1.
 
 ## 4. Destroy resources
 ```jsx
-chmod +x ./bin/destroy.sh
-./bin/destroy.sh 
+cd bin/
+chmod +x ./destroy.sh
+./destroy.sh 
 ```
 
 ## 5. Advance Operation
