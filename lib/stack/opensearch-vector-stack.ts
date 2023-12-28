@@ -31,9 +31,13 @@ export class OpenSearchVectorDBStack extends cdk.Stack {
 
         const collectionName = `bedrock-knowledge-base-gbuild`;
 
+        const random = (length = 8) => {
+            return Math.random().toString(16).substr(2, length);
+        };
+
         // Bedrock Knowledge Base IAM role
         const kbRoleArn = new iam.Role(this, `${prefix}CollBedrockKnowledgeBaseRole`, {
-            roleName: `AmazonBedrockExecutionRoleForKnowledgeBase_${prefixLower}`,
+            roleName: `AmazonBedrockExecutionRoleForKnowledgeBase_${random(6)}`,
             assumedBy: new iam.ServicePrincipal('bedrock.amazonaws.com'),
             managedPolicies: [iam.ManagedPolicy.fromAwsManagedPolicyName('AdministratorAccess')],
         }).roleArn;

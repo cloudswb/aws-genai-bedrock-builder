@@ -123,9 +123,9 @@ Now you can modify this config file according the following comments:
 
 ```jsx
 export const Config = {
-    DomainName: 'piyao.com', // The domain name(used as a website S3 bucket with SiteSubDomain
-    SiteSubDomain: 'genai-dev', // combine with DomainName as a S3 bucket name
-    Region: "us-east-1", // The region will be deploy, suggest same with aws cli credentional setting.
+    DomainName: 'xxx.com', // The domain name (will combine with <SiteSubDomain> to create a S3 bucket name like: <SiteSubDomain>.<DomainName>)
+    SiteSubDomain: 'genai-dev', // will combine with <DomainName> to create a S3 bucket name like: <SiteSubDomain>.<DomainName>
+    Region: "us-east-1", // Target region will be deploy, the region should have bedrock\opensearch serverless available.
     Auth: 'iam' //Auth type, DO NOT Change, we only support this IAM auth type currently.
 }
 ```
@@ -142,14 +142,18 @@ chmod +x ./bin/deploy.sh
 
 After deploy finished, there will have a CloudFront distribution info print out.
 
-
 ## 3. Run website
+
+You can open the CloudFront distribution link directly, but to use the system, you should create a user in Cognito user pool first.
 
 ### 3.1 Prepare login user in Cognito user pool
 
-You can get the Cognito info from CloudFormation stack “[XXX]CognitoUserPoolStack”
+You can get the Cognito info from CloudFormation service, the stack name should like “[XXX]CognitoUserPoolStack”.
+
 
 ![Untitled](readmefiles/Untitled%204.png)
+
+Open the user pool and create a new user with customized username and password.
 
 ![Untitled](readmefiles/Untitled%205.png)
 
@@ -157,7 +161,9 @@ You can get the Cognito info from CloudFormation stack “[XXX]CognitoUserPoolSt
 
 ### 3.2 Run Website deployment
 
-Get the output the CloudFront Address: like the url : [d21wi5ogab28wm.cloudfront.net](http://d21wi5ogab28wm.cloudfront.net/) according to outputs.
+Get the output of the CloudFront distribution address from you shell client: like the url : [d21wi5ogab28wm.cloudfront.net](http://d21wi5ogab28wm.cloudfront.net/).
+
+You also can get this CloudFront distribution address from output information of CloudFormation stack.
 
 ![Untitled](readmefiles/Untitled%207.png)
 

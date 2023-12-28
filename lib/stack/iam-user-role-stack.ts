@@ -74,8 +74,12 @@ export class CDKIAMUserRoleStack extends Stack {
           });
         /////
 
+        const random = (length = 8) => {
+            return Math.random().toString(16).substr(2, length);
+        };
+
         const agentRoleArn = new iam.Role(this, 'BedrockAgentRole', {
-          roleName: `AmazonBedrockExecutionRoleForAgents_${prefix}`,
+          roleName: `AmazonBedrockExecutionRoleForAgents_${random(6)}`,
           assumedBy: new iam.ServicePrincipal('bedrock.amazonaws.com'),
           managedPolicies: [iam.ManagedPolicy.fromAwsManagedPolicyName('AdministratorAccess')],
       }).roleArn;
