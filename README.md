@@ -138,7 +138,7 @@ Initialize CDK environment:
 cdk bootstrap
 ```
 
-Run the following shell script to deploy Backend service:
+Run the following shell script to deploy all services:
 
 ```jsx
 sudo npm install
