@@ -21,15 +21,10 @@ echo $callerAccount
 echo $callerUserArn
 
 echo "Start initialize the cdk bootstrap..."
+cd bin/
 cdk bootstrap aws://$callerAccount/$configRegion
+cd ..
 echo "Finished initialize the cdk bootstrap..."
-
-if [ -z "$callerUserArn" ]; then
-  echo "The caller indentity is empty, please config the aws cli crenditional info first."
-  return
-fi
-echo "Finished check the crenditional info..."
-
 
 
 ### 1. Deploy CDK stack and output to file 
@@ -128,7 +123,7 @@ echo "Finished create KB datasource ..."
 
 
 echo "Finished output bedrock agent json file..."
-cd ..
+
 cd src/frontend/
 npm install
 npm run build

@@ -136,10 +136,8 @@ Run the following shell script to deploy all services:
 
 ```jsx
 sudo npm install
-
-cd bin/
-chmod +x ./deploy.sh
-./deploy.sh
+chmod +x ./bin/deploy.sh
+./bin/deploy.sh
 ```
 
 After deploy finished, there will have a CloudFront distribution info print out.
@@ -163,13 +161,11 @@ Get the output the CloudFront Address: like the url : [d21wi5ogab28wm.cloudfront
 
 ![Untitled](readmefiles/Untitled%207.png)
 
-Login use the user created in Chapter 4.1.
 
 ## 4. Destroy resources
 ```jsx
-cd bin/
-chmod +x ./destroy.sh
-./destroy.sh 
+chmod +x ./bin/destroy.sh
+./bin/destroy.sh 
 ```
 
 ## 5. Advance Operation

@@ -21,5 +21,7 @@ echo $callerAccount
 echo $callerUserArn
 
 echo "Start initialize the cdk bootstrap..."
+cd bin/
 cdk bootstrap aws://$callerAccount/$configRegion
+cd ..
 echo "Finished initialize the cdk bootstrap..."
