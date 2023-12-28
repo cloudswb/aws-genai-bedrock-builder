@@ -80,7 +80,7 @@ if [ -z "$agentId" ]; then
   echo $createAgentOutput
   agentId=$(echo "$createAgentOutput" | jq -r '.agent.agentId')
   echo "Finished create bedrock agent..."
-
+  sleep 30
   echo "Starting prepare bedrock agent..."
   aws bedrock-agent prepare-agent --agent-id $agentId
   echo "Finished prepare bedrock agent..."
