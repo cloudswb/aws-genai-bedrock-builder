@@ -127,7 +127,9 @@ export const Config = {
     SiteSubDomain: 'genai-dev', // will combine with <DomainName> to create a S3 bucket name like: <SiteSubDomain>.<DomainName>
     Region: "us-east-1", // Target region will be deploy, the region should have bedrock\opensearch serverless available.
     Auth: 'iam', //Auth type, DO NOT Change, we only support this IAM auth type currently.
-    KBEmbeddingModelName: "amazon.titan-embed-text-v1" //Embedding Model Name
+    KBEmbeddingModelName: "amazon.titan-embed-text-v1" //Knowledge base Embedding Model ID
+    KBLLMName: "anthropic.claude-v2", // Knowledge base LLM ID
+    AgentLLMName: "anthropic.claude-v2", // Bedrock agent LLM ID
 }
 ```
 
