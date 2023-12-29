@@ -2,12 +2,14 @@ import { BedrockAgentRuntimeClient, InvokeAgentCommand } from "@aws-sdk/client-b
 // const { BedrockAgentRuntimeClient, InvokeAgentCommand } = require("@aws-sdk/client-bedrock-agent-runtime"); // CommonJS import
 
 import { DynamoDBClient, PutItemCommand, QueryCommand } from "@aws-sdk/client-dynamodb";
-const dynamodb = new DynamoDBClient( { region: 'us-east-1' } );
+
+const region = process.env.REGION;
+const dynamodb = new DynamoDBClient( { region: region } );
 
 import moment from 'moment'; 
 import {v4 as uuidv4} from 'uuid';
 
-const client = new BedrockAgentRuntimeClient({ region: "us-east-1" });
+const client = new BedrockAgentRuntimeClient({ region: region });
 
 export const handler = awslambda.streamifyResponse(
   async (event, responseStream, context) => {

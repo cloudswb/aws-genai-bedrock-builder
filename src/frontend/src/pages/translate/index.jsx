@@ -151,50 +151,7 @@ const Content = props => {
         setSubmitText('Translate')
         setSubmitState(false)
       });
-
-
-
-
   }
-
-
-
-
-  const postData = async () => {
-    const apiUrl = 'https://gw5bpwinwg.execute-api.us-east-1.amazonaws.com/prod/genai'; // Replace with your API endpoint
-    const prompt = `Human: <paragraph>${translateOption.ask}</paragraph>\n\n ${translateOption.prompt}, you need translate the content in <paragraph> in to ${translateOption.target} and output result within <result> tag.\n\nAssistant:`
-    console.log(prompt)
-    setSubmitText('Translating')
-    setSubmitState(true)
-    try {
-      const response = await axios.post(apiUrl, {
-        modelId: translateOption.llm,
-        max_tokens_to_sample: 2048,
-        temperature: 0.1,
-        top_p: 0.9,
-        top_k: 200,
-        prompt: prompt,
-      });
-
-      // Assuming the response contains JSON data
-      const jsonData = response.data;
-
-      // Analyze the JSON result
-      console.log('Response Data:', jsonData);
-      const resultElement = extractText(jsonData.body)
-      // Update state with the response data
-      setTranslatedContent(resultElement);
-      translateOption.translated = resultElement;
-      setSubmitText('Translate')
-      setSubmitState(false)
-    } catch (error) {
-      // Handle errors
-      console.error('Error:', error);
-      setSubmitText('Translate')
-      setSubmitState(false)
-    }
-  };
-
 
 
   function formatResultContent(inputString) {

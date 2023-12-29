@@ -53,7 +53,6 @@ REGION=$(echo $outputs | jq -r ".${prefix}IAMUserRoleStack.region")
 kbRoleArn=$(echo $outputs | jq -r ".${prefix}OpenSearchVectorDBStack.kbRoleArn")
 collectionId=$(echo $outputs | jq -r ".${prefix}OpenSearchVectorDBStack.CollectionId")
 collectionArn=$(echo $outputs | jq -r ".${prefix}OpenSearchVectorDBStack.CollectionArn")
-kbEmbeddingModelArn='arn:aws:bedrock:us-east-1::foundation-model/amazon.titan-embed-text-v1'
 
 echo "CDK deploy frist stage  completed"
 

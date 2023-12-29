@@ -1,8 +1,9 @@
 import { BedrockRuntimeClient, InvokeModelWithResponseStreamCommand } from "@aws-sdk/client-bedrock-runtime"; // ES Modules import
-const bedrock = new BedrockRuntimeClient({ region: "us-east-1" });
-
 import { DynamoDBClient, PutItemCommand, QueryCommand } from "@aws-sdk/client-dynamodb";
-const dynamodb = new DynamoDBClient( { region: 'us-east-1' } );
+
+const region = process.env.REGION;
+const bedrock = new BedrockRuntimeClient({ region: region });
+const dynamodb = new DynamoDBClient( { region: region } );
 
 import moment from 'moment'; 
 import {v4 as uuidv4} from 'uuid';

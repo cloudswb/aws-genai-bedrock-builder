@@ -47,7 +47,7 @@ export const handler = async (event) => {
 
     const kbName = param.kbName;
     console.log('kbName:', kbName);
-    return await createKb(kbName);
+    // return await createKb(kbName);
   }
   else if (actionType === 'listKb') {
     return await listKb()
@@ -91,35 +91,35 @@ export const handler = async (event) => {
 };
 
 
-export const createKb = async (name, clientToken) => {
-  const collectionArn = createOssCollection();
+// export const createKb = async (name, clientToken) => {
+//   const collectionArn = createOssCollection();
 
-  const input = { // CreateKnowledgeBaseRequest
-    name: name,
-    clientToken: "1b250368-cffc-4653-a05f-3f1d234e0825",
-    roleArn: "arn:aws:iam::629244530291:role/service-role/AmazonBedrockExecutionRoleForKnowledgeBase_role", // required
-    knowledgeBaseConfiguration: { // KnowledgeBaseConfiguration
-      type: "VECTOR", // required
-      vectorKnowledgeBaseConfiguration: { // VectorKnowledgeBaseConfiguration
-        embeddingModelArn: "arn:aws:bedrock:us-east-1::foundation-model/amazon.titan-embed-text-v1", // required
-      },
-    },
-    storageConfiguration: { // StorageConfiguration
-      type: "OPENSEARCH_SERVERLESS", // required
-      opensearchServerlessConfiguration: { // OpenSearchServerlessConfiguration
-        collectionArn: collectionArn, // required
-        vectorIndexName: "bedrock-knowledge-base-default-index", // required
-        fieldMapping: { // OpenSearchServerlessFieldMapping
-          vectorField: "bedrock-knowledge-base-default-vector", // required
-          textField: "AMAZON_BEDROCK_TEXT_CHUNK", // required
-          metadataField: "AMAZON_BEDROCK_METADATA", // required
-        },
-      },
-    }
-  };
-  const command = new CreateKnowledgeBaseCommand(input);
-  const response = await agentClient.send(command);
-}
+//   const input = { // CreateKnowledgeBaseRequest
+//     name: name,
+//     clientToken: "1b250368-cffc-4653-a05f-3f1d234e0825",
+//     roleArn: "arn:aws:iam::629244530291:role/service-role/AmazonBedrockExecutionRoleForKnowledgeBase_role", // required
+//     knowledgeBaseConfiguration: { // KnowledgeBaseConfiguration
+//       type: "VECTOR", // required
+//       vectorKnowledgeBaseConfiguration: { // VectorKnowledgeBaseConfiguration
+//         embeddingModelArn: `arn:aws:bedrock:${region}::foundation-model/amazon.titan-embed-text-v1`, // required
+//       },
+//     },
+//     storageConfiguration: { // StorageConfiguration
+//       type: "OPENSEARCH_SERVERLESS", // required
+//       opensearchServerlessConfiguration: { // OpenSearchServerlessConfiguration
+//         collectionArn: collectionArn, // required
+//         vectorIndexName: "bedrock-knowledge-base-default-index", // required
+//         fieldMapping: { // OpenSearchServerlessFieldMapping
+//           vectorField: "bedrock-knowledge-base-default-vector", // required
+//           textField: "AMAZON_BEDROCK_TEXT_CHUNK", // required
+//           metadataField: "AMAZON_BEDROCK_METADATA", // required
+//         },
+//       },
+//     }
+//   };
+//   const command = new CreateKnowledgeBaseCommand(input);
+//   const response = await agentClient.send(command);
+// }
 
 export const createOssCollection = async () => {
 

@@ -2,12 +2,13 @@ import { BedrockAgentRuntimeClient, RetrieveAndGenerateCommand } from "@aws-sdk/
 // const { BedrockAgentRuntimeClient, RetrieveAndGenerateCommand } = require("@aws-sdk/client-bedrock-agent-runtime"); // CommonJS import
 
 import { DynamoDBClient, PutItemCommand } from "@aws-sdk/client-dynamodb";
-const dynamodb = new DynamoDBClient( { region: 'us-east-1' } );
+const region = process.env.REGION;
+const dynamodb = new DynamoDBClient( { region: region } );
 
 import moment from 'moment'; 
 import {v4 as uuidv4} from 'uuid';
 
-const region = process.env.REGION;
+
 const client = new BedrockAgentRuntimeClient({ region: region });
 
 export const handler = async (event) => {
@@ -43,7 +44,7 @@ export const handler = async (event) => {
   
   let modelArn = ''
   if (!param.hasOwnProperty("modelArn") || param.modelArn == undefined || param.modelArn == "") {
-      modelArn = "arn:aws:bedrock:us-east-1::foundation-model/anthropic.claude-v2"
+      modelArn = `arn:aws:bedrock:${region}::foundation-model/anthropic.claude-v2`
   }
   else{
     modelArn = param.modelArn

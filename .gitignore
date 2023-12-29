@@ -8,7 +8,7 @@ node_modules
 cdk.out
 *.iml
 
-
+cdk.context.json
 
 backend.json
 frontend.json

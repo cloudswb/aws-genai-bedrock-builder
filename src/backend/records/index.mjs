@@ -1,6 +1,7 @@
 import { DynamoDBClient, PutItemCommand, QueryCommand } from "@aws-sdk/client-dynamodb";
 
-const client = new DynamoDBClient( { region: 'us-east-1' } );
+const region = process.env.REGION;
+const client = new DynamoDBClient( { region: region } );
 
 
 async function queryUserLogList(tableName, userName, startKey) {

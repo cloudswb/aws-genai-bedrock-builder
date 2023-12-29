@@ -126,7 +126,8 @@ export const Config = {
     DomainName: 'xxx.com', // The domain name (will combine with <SiteSubDomain> to create a S3 bucket name like: <SiteSubDomain>.<DomainName>)
     SiteSubDomain: 'genai-dev', // will combine with <DomainName> to create a S3 bucket name like: <SiteSubDomain>.<DomainName>
     Region: "us-east-1", // Target region will be deploy, the region should have bedrock\opensearch serverless available.
-    Auth: 'iam' //Auth type, DO NOT Change, we only support this IAM auth type currently.
+    Auth: 'iam', //Auth type, DO NOT Change, we only support this IAM auth type currently.
+    KBEmbeddingModelName: "amazon.titan-embed-text-v1" //Embedding Model Name
 }
 ```
 
@@ -163,7 +164,7 @@ Open the user pool and create a new user with customized username and password.
 
 Get the output of the CloudFront distribution address from you shell client: like the url : [d21wi5ogab28wm.cloudfront.net](http://d21wi5ogab28wm.cloudfront.net/).
 
-You also can get this CloudFront distribution address from output information of CloudFormation stack.
+You also can get this CloudFront distribution address from output information of CloudFormation stack (stack name like [xxx]).
 
 ![Untitled](readmefiles/Untitled%207.png)
 

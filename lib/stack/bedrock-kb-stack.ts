@@ -12,7 +12,7 @@ export class BedrockKBStack extends cdk.Stack {
         return this._userPool;
     }
 
-    constructor(scope: Construct, id: string, collectionArn: string, kbRoleArn: string, kbS3Arn: string ) {
+    constructor(scope: Construct, id: string, collectionArn: string, kbRoleArn: string, kbS3Arn: string) {
         super(scope, id);
 
         const kbName = 'GenAIBuilderKnowledgeBase';
@@ -24,32 +24,38 @@ export class BedrockKBStack extends cdk.Stack {
         const storageConfigurationType = 'OPENSEARCH_SERVERLESS';
         const dataSourceType = 'S3';
         const dataSourceBucketArn = kbS3Arn;
-        
+
         // Create Bedrock Knowledge Base backed by OpenSearch Servereless
         const myOpenSearchKb = new BedrockKnowledgeBase(this, 'BedrockOpenSearchKnowledgeBase', {
             name: kbName,
             roleArn: kbRoleArn,
             storageConfiguration: {
-            opensearchServerlessConfiguration: {
-                collectionArn: collectionArn,
-                fieldMapping: {
-                    metadataField: metadataField,
-                    textField: textField,
-                    vectorField: vectorFieldName,
+                opensearchServerlessConfiguration: {
+                    collectionArn: collectionArn,
+                    fieldMapping: {
+                        metadataField: metadataField,
+                        textField: textField,
+                        vectorField: vectorFieldName,
+                    },
+                    vectorIndexName: vectorIndexName,
                 },
-                vectorIndexName: vectorIndexName,
-            },
-            type: storageConfigurationType,
+                type: storageConfigurationType,
             },
             dataSource: {
-            name: dataSourceName,
-            dataSourceConfiguration: {
-                s3Configuration: {
-                bucketArn: dataSourceBucketArn,
+                name: dataSourceName,
+                dataSourceConfiguration: {
+                    s3Configuration: {
+                        bucketArn: dataSourceBucketArn,
+                    },
+                    type: dataSourceType,
                 },
-                type: dataSourceType,
             },
-            },
+            knowledgeBaseConfiguration:{
+                type: "VECTOR",
+                vectorKnowledgeBaseConfiguration:{
+                    embeddingModelArn: `arn:aws:bedrock:${Config.Region}::foundation-model/${Config.KBEmbeddingModelName}`
+                }
+            }
         });
 
         new CfnOutput(this, 'BedrockKnowledgeBaseArn', { value: myOpenSearchKb.knowledgeBaseArn });
