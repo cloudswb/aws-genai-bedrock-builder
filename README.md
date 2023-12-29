@@ -181,12 +181,12 @@ Sometimes to fix a issue or use to new feature, you may need to upgrade the solu
 
 1. Delete lambda function and Frontend website.
 
-    If you only need update backend and frontend resource, you only need to delete the following Stack from CloudFormation Service:
+    Generally you only need to delete the following Stack from CloudFormation Service:
 
     - GenAIBuilderCloudFrontWebsiteStack
     - GenAIBuilderLambdaFunctionStack
 
-    If you want delete all resources, you may refer to Section 4 to Destroy.
+    If you want delete all resources, you may refer to section 4 to destroy all(include knowledgebase and agent).
     ```jsx
     chmod +x ./bin/destroy.sh
     ./bin/destroy.sh 
