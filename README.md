@@ -175,7 +175,30 @@ chmod +x ./bin/destroy.sh
 ./bin/destroy.sh 
 ```
 
-## 5. Advance Operation
+## 5. Upgrade / ReDeploy
+
+Sometimes to fix a issue or use to new feature, you may need to upgrade the solution.
+
+
+1. Backup the config file
+```jsx
+// backup the pre configed file as the following commands may override this file
+cp bin/config.ts bin/config.ts.backup 
+```
+2. Force to get latest sourcecode
+   ```jsx
+    git checkout .
+    git pull
+    ```
+
+3. Re-Deploy the solution
+
+    ```jsx
+    sudo npm install
+    chmod +x ./bin/deploy.sh
+    ./bin/deploy.sh
+    ```
+
 
 <!-- ### 5.1 Change the project name to deploy multiple  -->
 
