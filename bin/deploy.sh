@@ -97,6 +97,19 @@ else
   # echo $getAgentAliasList
   agentAliasId=$(echo "$getAgentAliasList" | jq -r '.agentAliasSummaries[] | select(.agentAliasName == "genai-builder-alias-prod") | .agentAliasId')
   echo "$agentAliasId"
+  if [ -z "$agentAliasId" ]; then
+      echo "Starting prepare bedrock agent..."
+      aws bedrock-agent prepare-agent --agent-id $agentId
+      echo "Finished prepare bedrock agent..."
+      sleep 10
+
+      echo "Starting create bedrock agent alias for $agentId ..."
+      createAgentAliasOutput=$(aws bedrock-agent create-agent-alias --agent-id $agentId --agent-alias-name genai-builder-alias-prod)
+      echo $createAgentAliasOutput
+      agentAliasId=$(echo "$createAgentAliasOutput" | jq -r '.agentAlias.agentAliasId')
+      echo "Finished create bedrock agent alias $agentAliasId for $agentId ..."
+  else
+  fi
 
 fi
 

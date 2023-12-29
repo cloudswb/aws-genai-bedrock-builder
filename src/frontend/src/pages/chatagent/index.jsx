@@ -48,10 +48,8 @@ function FeaturesSpotlightFooter() {
   );
 }
 
+const sessionId = uuidv4();
 const ParentComponent = () => {
-
-  
-
 
   const [submitText, setSubmitText] = useState('Submit');
   const [submitState, setSubmitState] = useState(true);
@@ -80,7 +78,7 @@ const ParentComponent = () => {
 
   const agentId = config.BEDROCK_AGENT_ID;
   const agentAliasId = config.BEDROCK_AGENT_ALIAS_ID;
-  const sessionId = uuidv4();
+
   const endSession = false;
 
   // https://2uzuvw7m5ogfo3zobmn44oc4km0kahwd.lambda-url.us-east-1.on.aws/

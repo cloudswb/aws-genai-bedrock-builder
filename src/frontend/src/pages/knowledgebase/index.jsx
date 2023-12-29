@@ -32,7 +32,7 @@ import { config } from '../../../config';
 import Markdown from '../commons/markdown.tsx';
 const getStream = require('get-stream');
 const translateOption = { llm: 'anthropic.claude-v2', promptTemplate: 1 }
-
+const { v4: uuidv4 } = require('uuid');
 
 // const [selectedValue, setSelectedValue] = useState('');
 function FeaturesSpotlightFooter() {
@@ -45,6 +45,8 @@ function FeaturesSpotlightFooter() {
   );
 }
 
+let sessionId = "NONE"
+
 const ParentComponent = () => {
 
   const [submitText, setSubmitText] = useState('Submit');
@@ -53,7 +55,7 @@ const ParentComponent = () => {
   const [kbItems, setkbItems] = useState([]);
   const [conversionItems, setConversionItems] = useState([]);
   const [ask, setAsk] = useState(null);
-  const sessionId = uuidv4();
+
 
   // const [searchMessage, setSearchMessage] = useState('');
   const handleAddConversionItem = (props) => {
@@ -143,7 +145,10 @@ const ParentComponent = () => {
               // Update state with the response data
               let streamedDataObject = JSON.parse(streamedData);
 
-              
+              sessionId=streamedDataObject.body.sessionId
+
+              console.log("sessionId resukt:", sessionId)
+
               const tabs = []
               streamedDataObject.body.citations.map((citation, index)=> {
                 citation.retrievedReferences.map((item, index2) => {

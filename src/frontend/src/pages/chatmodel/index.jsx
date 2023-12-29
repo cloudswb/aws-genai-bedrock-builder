@@ -67,10 +67,10 @@ const ParentComponent = () => {
     { value: 'anthropic.claude-v2:1', label: 'claude-v2:1' },
     { value: 'anthropic.claude-instant-v1', label: 'claude-instant-v1' },
     { value: 'anthropic.claude-v1', label: 'claude-v1' },
-    { value: 'cohere.command-text-v14', label: 'cohere command-text-v14' },
-    { value: 'meta.llama2-70b-v1', label: 'llama2-70b-v1' },
-    { value: 'amazon.titan-text-lite-v1', label: 'titan-text-lite-v1' },
-    { value: 'amazon.titan-text-express-v1', label: 'titan-text-express-v1' },
+    // { value: 'cohere.command-text-v14', label: 'cohere command-text-v14' },
+    // { value: 'meta.llama2-70b-v1', label: 'llama2-70b-v1' },
+    // { value: 'amazon.titan-text-lite-v1', label: 'titan-text-lite-v1' },
+    // { value: 'amazon.titan-text-express-v1', label: 'titan-text-express-v1' },
   ];
 
   const prompts = [

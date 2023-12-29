@@ -51,16 +51,7 @@ export const handler = async (event) => {
   }
   const username = param.username;
 
-  if (!param.hasOwnProperty("sessionId") || param.sessionId == undefined || param.sessionId == "") {
-    return {
-      statusCode: 400,
-      body: JSON.stringify({ message: 'Invalid event parameter sessionId' })
-    };
-  }
-  const sessionId = param.sessionId;
-
   const input = { // RetrieveAndGenerateRequest
-    sessionId: sessionId,
     input: { // RetrieveAndGenerateInput
       text: prompt, // required
     },
@@ -72,6 +63,12 @@ export const handler = async (event) => {
       },
     },
   };
+
+  if(param.sessionId != undefined && param.sessionId != "" && param.sessionId != "NONE")
+  {
+    input.sessionId = param.sessionId;
+  }
+
 
   console.log("input:", input);
 
