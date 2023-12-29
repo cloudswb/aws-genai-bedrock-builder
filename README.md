@@ -179,19 +179,28 @@ chmod +x ./bin/destroy.sh
 
 Sometimes to fix a issue or use to new feature, you may need to upgrade the solution.
 
+1. Delete lambda function and Frontend website.
 
-1. Backup the config file
+    Delete the following Stack from CloudFormation Service:
+
+    - GenAIBuilderCloudFrontWebsiteStack
+    - GenAIBuilderLambdaFunctionStack
+
+
+2. Backup the config file
+
 ```jsx
 // backup the pre configed file as the following commands may override this file
 cp bin/config.ts bin/config.ts.backup 
 ```
-2. Force to get latest sourcecode
+
+3. Force to get latest sourcecode
    ```jsx
     git checkout .
     git pull
     ```
 
-3. Re-Deploy the solution
+4. Re-Deploy the solution
 
     ```jsx
     sudo npm install
