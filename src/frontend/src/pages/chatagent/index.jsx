@@ -34,7 +34,6 @@ import '../../styles/base.scss';
 // import { config } from 'process';
 import { config } from '../../../config';
 
-// const translateOption = { llm: 'anthropic.claude-v2', promptTemplate: 1 }
 const { v4: uuidv4 } = require('uuid');
 
 
@@ -68,16 +67,16 @@ const ParentComponent = () => {
     send();
   };
 
-  const llm_modes = [
-    { value: 'anthropic.claude-v2', label: 'Claude2' },
-  ];
+  // const llm_modes = [
+  //   { value: 'anthropic.claude-v2', label: 'Claude2' },
+  // ];
 
   const prompts = [
     { value: 'Human: you are a power and honest assistant, you need answer questions in <QUESTION> tag and output the purely answer directly ${ask}.\n Assistant:', label: 'Default' },
   ]
 
   const [selectedPromptValue, setSelectedPromptValue] = useState(prompts[0].value);
-  const [selectedLLMValue, setSelectedLLMValue] = useState('anthropic.claude-v2');
+  // const [selectedLLMValue, setSelectedLLMValue] = useState('anthropic.claude-v2');
 
   const agentId = config.BEDROCK_AGENT_ID;
   const agentAliasId = config.BEDROCK_AGENT_ALIAS_ID;
@@ -217,7 +216,7 @@ const ParentComponent = () => {
                 />
               </FormField>
             </div>
-            <div>
+            {/* <div>
               <FormField label="LLM Model" direction="direction">
                 <Select
                   autoFocus={true}
@@ -230,7 +229,7 @@ const ParentComponent = () => {
                   selectedOption={llm_modes.find(option => option.value == selectedLLMValue)}
                 />
               </FormField>
-            </div>
+            </div> */}
 
           </ColumnLayout>
           <ColumnLayout>

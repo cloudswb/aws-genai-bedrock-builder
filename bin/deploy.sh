@@ -53,6 +53,7 @@ REGION=$(echo $outputs | jq -r ".${prefix}IAMUserRoleStack.region")
 kbRoleArn=$(echo $outputs | jq -r ".${prefix}OpenSearchVectorDBStack.kbRoleArn")
 collectionId=$(echo $outputs | jq -r ".${prefix}OpenSearchVectorDBStack.CollectionId")
 collectionArn=$(echo $outputs | jq -r ".${prefix}OpenSearchVectorDBStack.CollectionArn")
+AgentLLMName=$(echo $outputs | jq -r ".${prefix}LambdaFunctionStack.AgentLLMName")
 
 echo "CDK deploy frist stage  completed"
 
@@ -71,7 +72,7 @@ if [ -z "$agentId" ]; then
 
   createAgentOutput=$(aws bedrock-agent create-agent --agent-name genai-builder-agent \
   --instruction "You are a powerful, helpful, honest, and harmless AI systems." \
-  --foundation-model anthropic.claude-v2 \
+  --foundation-model $AgentLLMName \
   --agent-resource-role-arn $agentRoleArn \
   --prompt-override-configuration file://bin/bedrock.json \
   --output json

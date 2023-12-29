@@ -93,6 +93,18 @@ export class CDKLambdaStack extends Stack {
             });
         }
 
+        new CfnOutput(this, `AgentLLMName`, {
+            value: Config.AgentLLMName,
+        });
+
+        new CfnOutput(this, `KBLLMName`, {
+            value: Config.KBLLMName,
+        });
+
+        new CfnOutput(this, `KBEmbeddingModelName`, {
+            value: Config.KBEmbeddingModelName,
+        });
+
 
     }
 
@@ -320,6 +332,7 @@ export class CDKLambdaStack extends Stack {
             timeout: Duration.seconds(90),
             environment: {
                 REGION: Config.Region,
+                LLM: Config.KBLLMName,
                 RECORDS_TABLENAME: `${prefix}RecordsTable`
             },
             initialPolicy: [lambdaPolicy, ddbPolicy],

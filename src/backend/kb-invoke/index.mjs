@@ -3,6 +3,7 @@ import { BedrockAgentRuntimeClient, RetrieveAndGenerateCommand } from "@aws-sdk/
 
 import { DynamoDBClient, PutItemCommand } from "@aws-sdk/client-dynamodb";
 const region = process.env.REGION;
+const llm = process.env.LLM;
 const dynamodb = new DynamoDBClient( { region: region } );
 
 import moment from 'moment'; 
@@ -42,14 +43,6 @@ export const handler = async (event) => {
   }
   const knowledgeBaseId = param.knowledgeBaseId
   
-  let modelArn = ''
-  if (!param.hasOwnProperty("modelArn") || param.modelArn == undefined || param.modelArn == "") {
-      modelArn = `arn:aws:bedrock:${region}::foundation-model/anthropic.claude-v2`
-  }
-  else{
-    modelArn = param.modelArn
-  }
-  
   if (!param.hasOwnProperty("username") || param.username == undefined || param.username == "") {
       return {
           statusCode: 400,
@@ -58,8 +51,16 @@ export const handler = async (event) => {
   }
   const username = param.username;
 
+  if (!param.hasOwnProperty("sessionId") || param.sessionId == undefined || param.sessionId == "") {
+    return {
+      statusCode: 400,
+      body: JSON.stringify({ message: 'Invalid event parameter sessionId' })
+    };
+  }
+  const sessionId = param.sessionId;
+
   const input = { // RetrieveAndGenerateRequest
-    // sessionId: "STRING_VALUE",
+    sessionId: sessionId,
     input: { // RetrieveAndGenerateInput
       text: prompt, // required
     },
@@ -67,7 +68,7 @@ export const handler = async (event) => {
       type: "KNOWLEDGE_BASE", // required
       knowledgeBaseConfiguration: { // KnowledgeBaseRetrieveAndGenerateConfiguration
         knowledgeBaseId: knowledgeBaseId, //"", // required
-        modelArn: modelArn
+        modelArn: `arn:aws:bedrock:${region}::foundation-model/${llm}`
       },
     },
   };

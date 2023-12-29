@@ -54,6 +54,7 @@ export const handler = awslambda.streamifyResponse(
     }
 
     const prompt = param.prompt; 
+    const modelId = param.modelId;
     const username = param.username;
     
     console.log('prompt:', prompt);
@@ -69,9 +70,8 @@ export const handler = awslambda.streamifyResponse(
       });
       
     console.log('body:', body);
-    
     const params = {
-      modelId: "anthropic.claude-v2",
+      modelId: modelId,
       contentType: "application/json",
       accept: "*/*",
       body: body,

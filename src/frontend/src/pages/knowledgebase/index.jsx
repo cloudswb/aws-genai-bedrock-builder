@@ -53,6 +53,7 @@ const ParentComponent = () => {
   const [kbItems, setkbItems] = useState([]);
   const [conversionItems, setConversionItems] = useState([]);
   const [ask, setAsk] = useState(null);
+  const sessionId = uuidv4();
 
   // const [searchMessage, setSearchMessage] = useState('');
   const handleAddConversionItem = (props) => {
@@ -101,7 +102,8 @@ const ParentComponent = () => {
     const request_parameters = JSON.stringify({
       "prompt": ask,
       "knowledgeBaseId": selectedKBID,
-      "username": userName
+      "username": userName,
+      "sessionId": sessionId
     });
 
     let headers = {}
