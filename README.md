@@ -127,7 +127,7 @@ export const Config = {
     SiteSubDomain: 'genai-dev', // will combine with <DomainName> to create a S3 bucket name like: <SiteSubDomain>.<DomainName>
     Region: "us-east-1", // Target region will be deploy, the region should have bedrock\opensearch serverless available.
     Auth: 'iam', //Auth type, DO NOT Change, we only support this IAM auth type currently.
-    KBEmbeddingModelName: "amazon.titan-embed-text-v1" //Knowledge base Embedding Model ID
+    KBEmbeddingModelName: "amazon.titan-embed-text-v1", //Knowledge base Embedding Model ID
     KBLLMName: "anthropic.claude-v2", // Knowledge base LLM ID
     AgentLLMName: "anthropic.claude-v2", // Bedrock agent LLM ID
 }
@@ -216,7 +216,51 @@ cp bin/config.ts bin/config.ts.backup
     ```
 
 
-<!-- ### 5.1 Change the project name to deploy multiple  -->
+## 6. Enable Bedrock Agent Conversation Feature
+
+Open the Advanced prompts: IN  Amazon Bedrock > Agents > genai-builder-agent > Working draft.
+
+### 6.1 Active "Orchestration" in Advanced prompts:
+
+- Enable "Override orchestration template defaults" toggle button
+- Enable "Activate orchestration template" toggle button
+- Input the following prompt into prompt template(You also can adjust this template as you needed):
+
+```jsx
+
+
+Human:
+You are a research assistant AI that has been equipped with one or more functions to help you answer a <question>. Your goal is to answer the user's question to the best of your ability.
+You were created with these instructions to consider as well:
+<auxiliary_instructions>$instruction$</auxiliary_instructions>
+
+$prompt_session_attributes$
+
+Always return your final answer within <answer></answer> tags.
+
+$conversation_history$
+
+The user input is <question>$question$</question>
+
+
+Assistant: <scratchpad> I understand I cannot use functions that have not been provided to me to answer this question.
+
+$agent_scratchpad$
+```
+
+### 6.2 
+Amazon Bedrock > Agents > genai-builder-agent > Aliases
+
+Create a new aliaes, and Get the new created Aliaes ID.
+
+### 6.3 Active this new Aliaes ID in front-end
+
+Open 'backend.json' file in src/frontend folder.
+
+Replace the value of attribute "agentAlias" to new Aliaes ID created in step 6.2.
+
+Now, you can go to the cloudformation and delete the website related stack (which named like xxxCloudFrontWebsiteStack)
+Then re-deploy the project like Step #5.4.
 
 # Features Introduction
 
