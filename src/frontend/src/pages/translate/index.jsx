@@ -54,6 +54,34 @@ const extractText = (body) => {
 }
 
 
+export const GetUserName = () =>{
+
+
+  const token = Cookies.get('jwt');
+  console.log("token:", token);
+
+  const decodeToken = token => {
+    const base64Url = token.split('.')[1];
+    const base64 = base64Url.replace('-', '+').replace('_', '/');
+    console.log(JSON.parse(window.atob(base64)))
+    return JSON.parse(window.atob(base64));
+  };
+
+  if (token) {
+      // Decode the token to get its payload
+      const decodedToken = decodeToken(token);
+
+      // Check the expiration time (assuming 'exp' is a key in the token payload)
+      const isTokenValid = decodedToken.exp * 1000 > Date.now();
+      if(isTokenValid){
+        return decodedToken.username;
+      }
+
+      return ""
+  }
+
+}
+
 
 const Content = props => {
   const [sourceContent, setSourceContent] = useState(null);
@@ -66,8 +94,6 @@ const Content = props => {
   const [submitText, setSubmitText] = useState('Translate');
   const [submitState, setSubmitState] = useState(false)
 
-
-
   const copyToClipboard = (text) => {
     navigator.clipboard.writeText(text)
       .then(() => {
@@ -78,6 +104,7 @@ const Content = props => {
       });
   };
 
+  
   async function send() {
     
 
@@ -88,10 +115,14 @@ const Content = props => {
     const host = config.LambdaModelInvoke_URL;
     const region = config.REGION;
     const base = config.Lambda_URL_BASE;
-    // const request_parameters = `{"prompt": "Human: <tobetranslate>${translateOption.ask.replace(/\n/g, "<br>")}</tobetranslate>, ${translateOption.prompt}, you need translate the content inside <tobetranslate> tag in to ${translateOption.target} and only output translated result in to <result> tag. Assistant:"}`;
+    const userName = GetUserName();
+
     const request_parameters = JSON.stringify({
-      "prompt": `Human: <tobetranslate>${translateOption.ask}</tobetranslate>, ${translateOption.prompt}, you need translate the content inside <tobetranslate> tag in to ${translateOption.target} and only output translated result in to <result> tag. Assistant:`
+      "prompt": `Human: <tobetranslate>${translateOption.ask}</tobetranslate>, ${translateOption.prompt}, you need translate the content inside <tobetranslate> tag in to ${translateOption.target} and only output translated result in to <result> tag. Assistant:`,
+      "username": userName,
+      "modelId": LLMOption
     });
+
 
     let headers = {}
     if (config.AUTH.toLowerCase() == 'iam') {
