@@ -18,10 +18,12 @@ import {
 import {
   PageHeader,
   getSignedPostHeader,
+  GetUserName
 } from '../details/common-components.jsx';
 import {
   CustomAppLayout,
   Navigation,
+
 } from '../commons/common-components';
 import ToolsContent from '../details/tools-content.jsx';
 import '../../styles/base.scss';
@@ -51,35 +53,6 @@ const extractText = (body) => {
   const endTagLength = endTag.length
 
   return body.substring(startTagLength + 1, body.length - endTagLength).trim();
-}
-
-
-export const GetUserName = () =>{
-
-
-  const token = Cookies.get('jwt');
-  console.log("token:", token);
-
-  const decodeToken = token => {
-    const base64Url = token.split('.')[1];
-    const base64 = base64Url.replace('-', '+').replace('_', '/');
-    console.log(JSON.parse(window.atob(base64)))
-    return JSON.parse(window.atob(base64));
-  };
-
-  if (token) {
-      // Decode the token to get its payload
-      const decodedToken = decodeToken(token);
-
-      // Check the expiration time (assuming 'exp' is a key in the token payload)
-      const isTokenValid = decodedToken.exp * 1000 > Date.now();
-      if(isTokenValid){
-        return decodedToken.username;
-      }
-
-      return ""
-  }
-
 }
 
 
