@@ -33,8 +33,8 @@
       {
         "promptType": "KNOWLEDGE_BASE_RESPONSE_GENERATION",
         "promptCreationMode": "OVERRIDDEN",
-        "promptState": "DISABLED",
-        "basePromptTemplate": "$conversation_history$",
+        "promptState": "ENABLED",
+        "basePromptTemplate": "\n\n\n\n Human: \n You are a research assistant AI that has been equipped with one or more functions to help you answer a <question>. Your goal is to answer the user's question to the best of your ability. \n You were created with these instructions to consider as well: \n <auxiliary_instructions>$instruction$</auxiliary_instructions> \n\n $prompt_session_attributes$ \n\n Always return your final answer within <answer></answer> tags. \n\n $conversation_history$ \n\n The user input is <question>$question$</question> \n\n Assistant: <scratchpad> I understand I cannot use functions that have not been provided to me to answer this question. \n\n $agent_scratchpad$",
         "inferenceConfiguration":
         {
           "temperature": 0,
