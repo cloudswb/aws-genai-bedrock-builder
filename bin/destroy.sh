@@ -12,8 +12,11 @@ echo "Starting to destroy all resources..."
 
 outputs=$(cat src/frontend/backend.json)
 agentId=$(echo $outputs | jq -r '.agentId')
+agentAlias=$(echo $outputs | jq -r '.agentAlias')
 echo $agentId
+echo $agentAlias
 
+aws bedrock-agent  delete-agent-alias --agent-id $agentId --agent-alias-id $agentAlias
 aws bedrock-agent delete-agent --agent-id $agentId
 
 echo "Start check the crenditional info..."

@@ -39,6 +39,9 @@ async function addGenLog(tableName, newItem) {
   }
 }
 
+
+
+
 export const handler = awslambda.streamifyResponse(
   async (event, responseStream, context) => {
     console.log('event:', event);
@@ -60,15 +63,20 @@ export const handler = awslambda.streamifyResponse(
     console.log('prompt:', prompt);
     
     const body = JSON.stringify({
-        prompt: `${prompt}`,
-        max_tokens_to_sample: 2048,
-        temperature: 0.1,
-        top_k: 250,
-        top_p: 0.5,
-        stop_sequences: ["\n\nHuman:"],
-        anthropic_version: "bedrock-2023-05-31",
-      });
-      
+      anthropic_version: "bedrock-2023-05-31",
+      max_tokens: 2048,
+      messages: [
+        {
+          role: "user",
+          content: [{ type: "text", text: `${prompt}` }],
+        },
+      ],
+      temperature: 0.5,
+      top_p: 0.5,
+      top_k: 250,
+      stop_sequences: ["\n\nHuman:"],
+    });
+    
     console.log('body:', body);
     const params = {
       modelId: modelId,
@@ -84,19 +92,22 @@ export const handler = awslambda.streamifyResponse(
     const response = await bedrock.send(command);
     console.log("response:", response);
     
-    const chunks = [];
-
-    for await (const chunk of response.body) {
-      if(chunk.hasOwnProperty("chunk") && chunk.chunk.hasOwnProperty("bytes")){
-        const parsed = JSON.parse(
-          Buffer.from(chunk.chunk.bytes, "base64").toString("utf-8")
-        );
-        chunks.push(parsed.completion);
-        responseStream.write(parsed.completion);
+    // const chunks = [];
+    let completeMessage = "";
+    for await (const item of response.body) {
+      const chunk = JSON.parse(new TextDecoder().decode(item.chunk.bytes));
+      
+      const chunk_type = chunk.type;
+  
+      if (chunk_type === "content_block_delta") {
+        const text = chunk.delta.text;
+        completeMessage = completeMessage + text;
+        responseStream.write(text);
+        console.log("text", text)
       }
     }
 
-    console.log(chunks.join(""));
+    console.log("completeMessage", completeMessage);
     responseStream.end();
     
 
@@ -115,12 +126,14 @@ export const handler = awslambda.streamifyResponse(
             "prompt": prompt,
             "setting": setting,
             "question": body,
-            "answer": chunks.join("")
+            "answer": completeMessage
         }
         
     console.log("newLog:", newLog)
     addGenLog(process.env.RECORDS_TABLENAME, newLog);
     // end add log
+    
+    return completeMessage;
   }
   
 
