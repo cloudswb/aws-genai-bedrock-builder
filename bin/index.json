@@ -9,16 +9,16 @@
       "properties": {
          "bedrock-knowledge-base-default-vector": {
             "type": "knn_vector",
-            "dimension": 1536,
+            "dimension": 4,
             "method": {
-               "name":"hnsw",
-               "engine":"nmslib",
-               "space_type": "l2",
-               "parameters":{
-                   "m":16,
-                   "ef_construction": 512
-               }
-           }
+              "name": "hnsw",
+              "space_type": "innerproduct",
+              "engine": "faiss",
+              "parameters": {
+                "ef_construction": 256,
+                "m": 48
+              }
+            }
          },
          "AMAZON_BEDROCK_METADATA": {
             "type": "text",
