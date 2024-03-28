@@ -129,7 +129,7 @@ export const Config = {
     Auth: 'iam', //Auth type, DO NOT Change, we only support this IAM auth type currently.
     KBEmbeddingModelName: "amazon.titan-embed-text-v1", //Knowledge base Embedding Model ID
     KBLLMName: "anthropic.claude-3-sonnet-20240229-v1:0", // Knowledge base LLM ID
-    AgentLLMName: "anthropic.claude-3-sonnet-20240229-v1:0", // Bedrock agent LLM ID
+    AgentLLMName: "anthropic.claude-v2:1", // Bedrock agent LLM ID
 }
 ```
 
