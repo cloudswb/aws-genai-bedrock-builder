@@ -63,8 +63,11 @@ const ParentComponent = () => {
   };
 
   const llm_modes = [
-    { value: 'anthropic.claude-v2', label: 'claude-v2' },
+    { value: 'anthropic.claude-3-haiku-20240307-v1:0', label: 'claude-3-haiku' },
+    { value: 'anthropic.claude-3-sonnet-20240229-v1:0', label: 'claude-3-sonnet' },
     { value: 'anthropic.claude-v2:1', label: 'claude-v2:1' },
+    { value: 'anthropic.claude-v2:1', label: 'claude-v2:1' },
+    { value: 'anthropic.claude-v2', label: 'claude-v2' },
     { value: 'anthropic.claude-instant-v1', label: 'claude-instant-v1' },
     { value: 'anthropic.claude-v1', label: 'claude-v1' },
     // { value: 'cohere.command-text-v14', label: 'cohere command-text-v14' },
@@ -78,7 +81,7 @@ const ParentComponent = () => {
   ]
 
   const [selectedPromptValue, setSelectedPromptValue] = useState(prompts[0].value);
-  const [selectedLLMValue, setSelectedLLMValue] = useState('anthropic.claude-v2');
+  const [selectedLLMValue, setSelectedLLMValue] = useState('anthropic.claude-3-sonnet-20240229-v1:0');
 
   async function send() {
     const method = 'POST';

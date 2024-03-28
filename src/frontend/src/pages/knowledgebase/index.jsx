@@ -31,7 +31,7 @@ import '../../styles/base.scss';
 import { config } from '../../../config';
 import Markdown from '../commons/markdown.tsx';
 const getStream = require('get-stream');
-const translateOption = { llm: 'anthropic.claude-v2', promptTemplate: 1 }
+const translateOption = { llm: 'anthropic.claude-3-sonnet-20240229-v1:0', promptTemplate: 1 }
 const { v4: uuidv4 } = require('uuid');
 
 // const [selectedValue, setSelectedValue] = useState('');

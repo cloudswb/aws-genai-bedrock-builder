@@ -128,8 +128,8 @@ export const Config = {
     Region: "us-east-1", // Target region will be deploy, the region should have bedrock\opensearch serverless available.
     Auth: 'iam', //Auth type, DO NOT Change, we only support this IAM auth type currently.
     KBEmbeddingModelName: "amazon.titan-embed-text-v1", //Knowledge base Embedding Model ID
-    KBLLMName: "anthropic.claude-v2", // Knowledge base LLM ID
-    AgentLLMName: "anthropic.claude-v2", // Bedrock agent LLM ID
+    KBLLMName: "anthropic.claude-3-sonnet-20240229-v1:0", // Knowledge base LLM ID
+    AgentLLMName: "anthropic.claude-3-sonnet-20240229-v1:0", // Bedrock agent LLM ID
 }
 ```
 

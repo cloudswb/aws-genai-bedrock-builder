@@ -38,7 +38,7 @@ const languages = [
   { value: 'Chinese', label: '中文' },
 ];
 const llm_modes = [
-  { value: 'anthropic.claude-v2', label: 'Claude2' },
+  { value: 'anthropic.claude-3-sonnet-20240229-v1:0', label: 'Claude-3-sonnet' },
   // { value: 'ai21.j2-mid-v1', label: 'Jurassic-2 Mid' },
   // { value: 'ai21.j2-ultra-v1', label: 'Jurassic-2 Ultra' },
   // { value: 'meta.llama2-13b-chat-v1', label: 'Llama 2 Chat 13B' },
